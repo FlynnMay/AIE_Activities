@@ -4,27 +4,10 @@ using System.Numerics;
 
 namespace AIE_19_RayLibPong
 {
-    class Ball
-    {
-        public Vector2 dir = new Vector2();
-        public Vector2 pos = new Vector2();
-        public float speed = 5.0f;
-        public float resetSpeed = 5.0f;
-        public float radius = 10.0f;
-    }
-    class Paddle
-    {
-        public Vector2 pos = new Vector2();
-        public Vector2 size = new Vector2(10, 100);
-        public float speed = 5.0f;
-        public int score = 0;
-        public KeyboardKey upKey;
-        public KeyboardKey downKey;
-    }
-
     class Program
     {
         Ball ball;
+        Ball ball2;
         Paddle lPaddle;
         Paddle rPaddle;
         int windowWidth = 800;
@@ -50,11 +33,11 @@ namespace AIE_19_RayLibPong
             Raylib.CloseWindow();
         }
 
-        private void ResetBall()
+        private void ResetBall(Ball b)
         {
-            ball.pos.X = windowWidth / 2;
-            ball.pos.Y = windowHeight / 2;
-            ball.speed = ball.resetSpeed;
+            b.pos.X = windowWidth / 2;
+            b.pos.Y = windowHeight / 2;
+            b.speed = ball.resetSpeed;
         }
 
         private void LoadGame()
@@ -64,13 +47,19 @@ namespace AIE_19_RayLibPong
             ball.pos.Y = windowHeight / 2;
             ball.dir.X = 0.707f;
             ball.dir.Y = 0.707f;
+            
+            ball2 = new Ball();
+            ball2.pos.X = windowWidth / 2;
+            ball2.pos.Y = windowHeight / 2;
+            ball2.dir.X = -0.707f;
+            ball2.dir.Y = -0.707f;
 
             lPaddle = new Paddle();
             lPaddle.pos.X = 10;
             lPaddle.pos.Y = windowHeight / 2.0f;
             lPaddle.upKey = KeyboardKey.KEY_W;
             lPaddle.downKey = KeyboardKey.KEY_S;
-            
+
             rPaddle = new Paddle();
             rPaddle.pos.X = windowWidth - 10;
             rPaddle.pos.Y = windowHeight / 2.0f;
@@ -81,23 +70,29 @@ namespace AIE_19_RayLibPong
         private void Update()
         {
             UpdateBall(ball);
+
+            UpdateBall(ball2);
+            
             UpdatePaddle(lPaddle);
             UpdatePaddle(rPaddle);
             HandlePaddleBallCollision(lPaddle, ball);
             HandlePaddleBallCollision(rPaddle, ball);
+            
+            HandlePaddleBallCollision(lPaddle, ball2);
+            HandlePaddleBallCollision(rPaddle, ball2);
         }
         private void UpdateBall(Ball b)
         {
             b.pos += b.dir * b.speed * Raylib.GetFrameTime() * 60;
 
-            if (b.pos.X < 0) 
+            if (b.pos.X < 0)
             {
-                ResetBall();
+                ResetBall(b);
                 rPaddle.score += 1;
             }
             if (b.pos.X > windowWidth)
             {
-                ResetBall();
+                ResetBall(b);
                 lPaddle.score += 1;
             }
             if (b.pos.Y < 0) b.dir.Y = -b.dir.Y;
@@ -117,7 +112,7 @@ namespace AIE_19_RayLibPong
             if (p.pos.Y - (p.size.Y / 2) < 0) p.pos.Y = 0 + (p.size.Y / 2);
             if (p.pos.Y + (p.size.Y / 2) > windowHeight) p.pos.Y = windowHeight - (p.size.Y / 2);
         }
-        
+
         private void HandlePaddleBallCollision(Paddle p, Ball b)
         {
             float top = p.pos.Y - p.size.Y / 2;
@@ -136,21 +131,42 @@ namespace AIE_19_RayLibPong
         {
             Raylib.DrawCircle((int)b.pos.X, (int)b.pos.Y, b.radius, Color.WHITE);
         }
-        
+
         private void DrawPaddle(Paddle p)
         {
             Raylib.DrawRectanglePro(new Rectangle(p.pos.X, p.pos.Y, p.size.X, p.size.Y), p.size / 2, 0.0f, Color.WHITE);
         }
 
+        private void DrawScores(int x, int y, Paddle paddle, Color colour)
+        {
+            int spacer = 0;
+            for (int i = 0; i < Paddle.scoreMax - paddle.score; i++)
+            {
+                Raylib.DrawCircle(x + spacer, y, paddle.scoreSize, colour);
+                if (paddle.Equals(rPaddle))
+                {
+                    spacer += 30;
+                }
+                else
+                {
+                    spacer -= 30;
+                }
+            }
+        }
+
         private void Draw()
         {
             Raylib.BeginDrawing();
-            
+
             Raylib.ClearBackground(Color.BLACK);
 
             DrawBall(ball);
+            DrawBall(ball2);
             DrawPaddle(lPaddle);
             DrawPaddle(rPaddle);
+
+            DrawScores(0 + 50, windowHeight - 25, rPaddle, Color.BLUE);
+            DrawScores(windowWidth - 50, windowHeight - 25, lPaddle, Color.RED);
 
             Raylib.DrawText(lPaddle.score.ToString(), windowWidth / 4, 20, 20, Color.WHITE);
             Raylib.DrawText(rPaddle.score.ToString(), windowWidth - (windowWidth / 4), 20, 20, Color.WHITE);
