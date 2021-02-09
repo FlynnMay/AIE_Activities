@@ -15,6 +15,7 @@ namespace AIE_28_AsteroidsRaylib
         public float accelerationSpeed = 0.1f;
         public float rotation = 0.0f;
         public float rotationSpeed = 5.0f;
+        public float maxSpeed = 15f;
 
         public Player(Program program, Vector2 pos, Vector2 size)
         {
@@ -43,6 +44,18 @@ namespace AIE_28_AsteroidsRaylib
                 var dir = GetFacingDirection();
                 velocity -= dir * accelerationSpeed;
             }
+
+            // limiting player speed
+            if (velocity.X > maxSpeed) velocity.X = maxSpeed;
+            if (velocity.Y > maxSpeed) velocity.Y = maxSpeed;
+            if (velocity.X < -maxSpeed) velocity.X = -maxSpeed;
+            if (velocity.Y < -maxSpeed) velocity.Y = -maxSpeed;
+
+            // deceleration
+            if (velocity.X > 0) velocity.X -= 0.05f;
+            if (velocity.Y > 0) velocity.Y -= 0.05f;
+            if (velocity.X < 0) velocity.X += 0.05f;
+            if (velocity.Y < 0) velocity.Y += 0.05f;
 
             // add velocity to positon
             pos += velocity;

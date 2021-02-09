@@ -13,6 +13,7 @@ namespace AIE_28_AsteroidsRaylib
         public Vector2 dir = new Vector2();
         public float radius = 40.0f;
 
+        public bool isAlive = true;
         public Asteroid(Program program, Vector2 pos, Vector2 dir)
         {
             this.program = program;

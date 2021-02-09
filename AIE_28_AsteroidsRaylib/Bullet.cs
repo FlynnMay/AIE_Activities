@@ -13,6 +13,8 @@ namespace AIE_28_AsteroidsRaylib
         public Vector2 dir = new Vector2();
         public float speed = 10;
 
+        public bool isAlive = true;
+
         public Bullet(Program program, Vector2 pos, Vector2 dir)
         {
             this.program = program;
