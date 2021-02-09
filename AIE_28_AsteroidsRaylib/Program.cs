@@ -45,7 +45,7 @@ namespace AIE_28_AsteroidsRaylib
             player = new Player(this,
                 new Vector2(windowWidth / 2, windowHeight / 2),
                 new Vector2(64, 64));
-            
+
             // initialise bullets to be null
             for (int i = 0; i < bullets.Length; i++)
             {
@@ -69,21 +69,19 @@ namespace AIE_28_AsteroidsRaylib
             player.Update();
 
             // update all bullets
-            for (int i = 0; i < bullets.Length; i++)
+            foreach (var bullet in bullets)
             {
-                if (bullets[i] != null)
+                if (bullet != null)
                 {
-                    bullets[i].Update();
-
+                    bullet.Update();
                 }
             }
             // update all asteroids
-            for (int i = 0; i < asteroids.Length; i++)
+            foreach (var asteroid in asteroids)
             {
-                if (asteroids[i] != null)
+                if (asteroid != null)
                 {
-                    asteroids[i].Update();
-
+                    asteroid.Update();
                 }
             }
 
@@ -103,20 +101,20 @@ namespace AIE_28_AsteroidsRaylib
             player.Draw();
 
             // draw all bullets
-            for (int i = 0; i < bullets.Length; i++)
+            foreach (var bullet in bullets)
             {
-                if (bullets[i] != null)
+                if (bullet != null)
                 {
-                    bullets[i].Draw();
+                    bullet.Draw();
                 }
             }
 
             // draw all asteroids
-            for (int i = 0; i < asteroids.Length; i++)
+            foreach (var asteroid in asteroids)
             {
-                if (asteroids[i] != null)
+                if (asteroid != null)
                 {
-                    asteroids[i].Draw();
+                    asteroid.Draw();
                 }
             }
 
@@ -147,7 +145,7 @@ namespace AIE_28_AsteroidsRaylib
 
             // left wall spawn
             if (side == 0) SpawnAsteroid(new Vector2(0, random.Next(0, windowHeight)), dir, radius);
-            
+
             // top wall spawn
             if (side == 1) SpawnAsteroid(new Vector2(random.Next(0, windowWidth), 0), dir, radius);
 
@@ -181,8 +179,8 @@ namespace AIE_28_AsteroidsRaylib
             {
                 if (asteroid.radius > 10)
                 {
-                    SpawnAsteroid(asteroid.pos, asteroid.dir, asteroid.radius /2);
-                    SpawnAsteroid(asteroid.pos, -asteroid.dir, asteroid.radius /2);
+                    SpawnAsteroid(asteroid.pos, asteroid.dir, asteroid.radius / 2);
+                    SpawnAsteroid(asteroid.pos, -asteroid.dir, asteroid.radius / 2);
                 }
                 for (int i = 0; i < bullets.Length; i++)
                 {
