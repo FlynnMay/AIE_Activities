@@ -41,21 +41,23 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AIE_18_Calculator", "AIE_18
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AIE_19_RayLibPong", "AIE_19_RayLibPong\AIE_19_RayLibPong.csproj", "{CA5ADA00-8F10-4A27-AC72-B35C72FB5376}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIE_20_GetTwoLengths", "AIE_20_GetTwoLengths\AIE_20_GetTwoLengths.csproj", "{2B1A486D-7000-45D3-83B1-7FC37D42F469}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AIE_20_GetTwoLengths", "AIE_20_GetTwoLengths\AIE_20_GetTwoLengths.csproj", "{2B1A486D-7000-45D3-83B1-7FC37D42F469}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIE_21_NeedleInTheHaystack", "AIE_21_NeedleInTheHaystack\AIE_21_NeedleInTheHaystack.csproj", "{1726C756-1A67-400E-BF8C-622748054DAC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AIE_21_NeedleInTheHaystack", "AIE_21_NeedleInTheHaystack\AIE_21_NeedleInTheHaystack.csproj", "{1726C756-1A67-400E-BF8C-622748054DAC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIE_22_CalculateAverage", "CalculateAverage\AIE_22_CalculateAverage.csproj", "{4AB54634-9385-4453-AAC6-DFC36EEB288B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AIE_22_CalculateAverage", "CalculateAverage\AIE_22_CalculateAverage.csproj", "{4AB54634-9385-4453-AAC6-DFC36EEB288B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIE_23_ReverseArray", "AIE_23_ReverseArray\AIE_23_ReverseArray.csproj", "{B0F3C8D7-4BD3-4332-B4EB-2EFC5394B3AD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AIE_23_ReverseArray", "AIE_23_ReverseArray\AIE_23_ReverseArray.csproj", "{B0F3C8D7-4BD3-4332-B4EB-2EFC5394B3AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIE_24_InsertNextTo", "AIE_24_InsertNextTo\AIE_24_InsertNextTo.csproj", "{29F8B4C4-69F2-449E-A222-D6353B49DDB8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AIE_24_InsertNextTo", "AIE_24_InsertNextTo\AIE_24_InsertNextTo.csproj", "{29F8B4C4-69F2-449E-A222-D6353B49DDB8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIE_25_MinMax", "25_AIE_MinMax\AIE_25_MinMax.csproj", "{3B0BF95F-CB13-42E9-831C-A0A4946DE522}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AIE_25_MinMax", "25_AIE_MinMax\AIE_25_MinMax.csproj", "{3B0BF95F-CB13-42E9-831C-A0A4946DE522}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIE_26_CheckArrayEquality", "AIE_26_CheckArrayEquality\AIE_26_CheckArrayEquality.csproj", "{EF4BF19C-A002-4050-80E2-57C06861AFFD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AIE_26_CheckArrayEquality", "AIE_26_CheckArrayEquality\AIE_26_CheckArrayEquality.csproj", "{EF4BF19C-A002-4050-80E2-57C06861AFFD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIE_27_Classes", "AIE_27_Classes\AIE_27_Classes.csproj", "{F1D50998-451E-40E8-A8D3-14C74D742B4A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AIE_27_Classes", "AIE_27_Classes\AIE_27_Classes.csproj", "{F1D50998-451E-40E8-A8D3-14C74D742B4A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIE_28_AsteroidsRaylib", "AIE_28_AsteroidsRaylib\AIE_28_AsteroidsRaylib.csproj", "{B5FBEE62-0F19-49C6-98EE-1C0C215CD5D0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -171,6 +173,10 @@ Global
 		{F1D50998-451E-40E8-A8D3-14C74D742B4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F1D50998-451E-40E8-A8D3-14C74D742B4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F1D50998-451E-40E8-A8D3-14C74D742B4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5FBEE62-0F19-49C6-98EE-1C0C215CD5D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5FBEE62-0F19-49C6-98EE-1C0C215CD5D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5FBEE62-0F19-49C6-98EE-1C0C215CD5D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5FBEE62-0F19-49C6-98EE-1C0C215CD5D0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

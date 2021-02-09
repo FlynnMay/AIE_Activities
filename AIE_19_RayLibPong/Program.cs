@@ -1,5 +1,6 @@
 ﻿using Raylib_cs;
 using System;
+using System.Collections.Generic;
 using System.Numerics;
 
 namespace AIE_19_RayLibPong
@@ -12,6 +13,8 @@ namespace AIE_19_RayLibPong
         Paddle rPaddle;
         int windowWidth = 800;
         int windowHeight = 450;
+        bool endGame = false;
+        List<Paddle> paddles = new List<Paddle>();
         static void Main(string[] args)
         {
             Program p = new Program();
@@ -47,7 +50,7 @@ namespace AIE_19_RayLibPong
             ball.pos.Y = windowHeight / 2;
             ball.dir.X = 0.707f;
             ball.dir.Y = 0.707f;
-            
+
             ball2 = new Ball();
             ball2.pos.X = windowWidth / 2;
             ball2.pos.Y = windowHeight / 2;
@@ -55,16 +58,21 @@ namespace AIE_19_RayLibPong
             ball2.dir.Y = -0.707f;
 
             lPaddle = new Paddle();
+            lPaddle.name = "Left Player";
             lPaddle.pos.X = 10;
             lPaddle.pos.Y = windowHeight / 2.0f;
             lPaddle.upKey = KeyboardKey.KEY_W;
             lPaddle.downKey = KeyboardKey.KEY_S;
 
             rPaddle = new Paddle();
+            rPaddle.name = "Right Player";
             rPaddle.pos.X = windowWidth - 10;
             rPaddle.pos.Y = windowHeight / 2.0f;
             rPaddle.upKey = KeyboardKey.KEY_UP;
             rPaddle.downKey = KeyboardKey.KEY_DOWN;
+
+            paddles.Add(lPaddle);
+            paddles.Add(rPaddle);
         }
 
         private void Update()
@@ -72,12 +80,12 @@ namespace AIE_19_RayLibPong
             UpdateBall(ball);
 
             UpdateBall(ball2);
-            
+
             UpdatePaddle(lPaddle);
             UpdatePaddle(rPaddle);
             HandlePaddleBallCollision(lPaddle, ball);
             HandlePaddleBallCollision(rPaddle, ball);
-            
+
             HandlePaddleBallCollision(lPaddle, ball2);
             HandlePaddleBallCollision(rPaddle, ball2);
         }
@@ -152,24 +160,36 @@ namespace AIE_19_RayLibPong
                     spacer -= 30;
                 }
             }
+
         }
+
 
         private void Draw()
         {
             Raylib.BeginDrawing();
 
             Raylib.ClearBackground(Color.BLACK);
+            foreach (var paddle in paddles)
+            {
+                if (paddle.score <= 3)
+                {
+                    DrawBall(ball);
+                    DrawBall(ball2);
+                    DrawPaddle(lPaddle);
+                    DrawPaddle(rPaddle);
+                }
+                else
+                {
+                    Raylib.DrawText(paddle.name + " Wins!", windowWidth / 2, windowHeight / 2, 50, Color.WHITE);
+                }
 
-            DrawBall(ball);
-            DrawBall(ball2);
-            DrawPaddle(lPaddle);
-            DrawPaddle(rPaddle);
+            }
 
             DrawScores(0 + 50, windowHeight - 25, rPaddle, Color.BLUE);
             DrawScores(windowWidth - 50, windowHeight - 25, lPaddle, Color.RED);
 
-            Raylib.DrawText(lPaddle.score.ToString(), windowWidth / 4, 20, 20, Color.WHITE);
-            Raylib.DrawText(rPaddle.score.ToString(), windowWidth - (windowWidth / 4), 20, 20, Color.WHITE);
+            //Raylib.DrawText(lPaddle.score.ToString(), windowWidth / 4, 20, 20, Color.WHITE);
+            //Raylib.DrawText(rPaddle.score.ToString(), windowWidth - (windowWidth / 4), 20, 20, Color.WHITE);
 
             Raylib.DrawFPS(10, 10);
 
