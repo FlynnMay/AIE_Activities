@@ -101,6 +101,7 @@ namespace AIE_28_AsteroidsRaylib
                 if (asteroid.isAlive)
                 {
                     asteroid.Update();
+                    DoPlayerAsteroidCollison(asteroid);
                 }
                 else
                 {
@@ -220,6 +221,28 @@ namespace AIE_28_AsteroidsRaylib
                 }
                 bullet.isAlive = false;
                 asteroid.isAlive = false;
+                player.score += 10;
+            }
+        }
+
+        public void DoPlayerAsteroidCollison(Asteroid asteroid)
+        {
+            if (!player.invulnerable)
+            {
+                if (asteroid == null)
+                    return;
+
+                float distance = (player.pos - asteroid.pos).Length();
+                if (distance < asteroid.radius)
+                {
+                    if (asteroid.radius > 10)
+                    {
+                        asteroidsToAdd.Add(SpawnAsteroid(asteroid.pos, asteroid.dir, asteroid.radius / 2));
+                        asteroidsToAdd.Add(SpawnAsteroid(asteroid.pos, -asteroid.dir, asteroid.radius / 2));
+                    }
+                    asteroid.isAlive = false;
+                    player.lives -= 1;
+                }
             }
         }
     }
