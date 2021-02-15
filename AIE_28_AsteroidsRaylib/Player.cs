@@ -6,17 +6,16 @@ using Raylib_cs;
 
 namespace AIE_28_AsteroidsRaylib
 {
-    class Player
+    class Player : GameObject
     {
         Program program;
-        public Vector2 pos = new Vector2();
         public Vector2 size = new Vector2(64, 64);
         public Vector2 velocity = new Vector2(0, 0);
         public Color currentPlayerColour = Color.WHITE;
         public Color playerColour = Color.WHITE;
         public Color shieldColour = Color.BLUE;
         public float accelerationSpeed = 0.1f;
-        public float rotation = 0.0f;
+        //public float rotation = 0.0f;
         public float rotationSpeed = 5.0f;
         public float maxSpeed = 15f;
         public float invTimer = 3f;
@@ -36,20 +35,18 @@ namespace AIE_28_AsteroidsRaylib
         {
             if (Raylib.IsKeyDown(KeyboardKey.KEY_A))
             {
-                rotation -= rotationSpeed;
+                Rotate(-rotationSpeed);
             }
             if (Raylib.IsKeyDown(KeyboardKey.KEY_D))
             {
-                rotation += rotationSpeed;
+                Rotate(rotationSpeed);
             }
             if (Raylib.IsKeyDown(KeyboardKey.KEY_W))
             {
-                var dir = GetFacingDirection();
                 velocity += dir * accelerationSpeed;
             }
             if (Raylib.IsKeyDown(KeyboardKey.KEY_A))
             {
-                var dir = GetFacingDirection();
                 velocity -= dir * accelerationSpeed;
             }
 
@@ -76,13 +73,14 @@ namespace AIE_28_AsteroidsRaylib
 
             if (Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE))
             {
-                program.SpawnBullet(pos, GetFacingDirection());
+                program.SpawnBullet(pos, dir);
             }
 
             // lives
             if (lives <= 0)
             {
                 pos = new Vector2(program.windowWidth / 2, program.windowHeight / 2);
+                velocity = new Vector2(0, 0);
                 lives = 3;
                 score -= 50;
                 invulnerable = true;
@@ -108,7 +106,7 @@ namespace AIE_28_AsteroidsRaylib
             }
         }
 
-        public Vector2 GetFacingDirection()
+        public Vector2 GetFacingDirection(float rotation)
         {
             return new Vector2(
                 MathF.Cos((MathF.PI / 180) * rotation),
@@ -124,7 +122,7 @@ namespace AIE_28_AsteroidsRaylib
                 new Rectangle(0, 0, texture.width, texture.height),
                 new Rectangle(pos.X, pos.Y, size.X, size.Y),
                 new Vector2(0.5f * size.X, 0.5f * size.Y),
-                rotation, currentPlayerColour);
+                GetRotation(), currentPlayerColour);
             Raylib.DrawText(score.ToString(), 0, 0, 20, Color.WHITE);
             DrawScores(Color.WHITE);
         }

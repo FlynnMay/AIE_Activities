@@ -6,11 +6,9 @@ using Raylib_cs;
 
 namespace AIE_28_AsteroidsRaylib
 {
-    class Bullet
+    class Bullet : GameObject
     {
         Program program;
-        public Vector2 pos = new Vector2();
-        public Vector2 dir = new Vector2();
         public float speed = 10;
 
         public bool isAlive = true;
