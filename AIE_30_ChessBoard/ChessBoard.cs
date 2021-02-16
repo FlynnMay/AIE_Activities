@@ -1,11 +1,12 @@
-﻿using System;
+﻿using AIE_31_ChessBoard;
+using System;
 using System.Collections.Generic;
 using System.Numerics;
 using System.Text;
 
 namespace ChessGame
 {
-    class ChessBoard
+    public class ChessBoard
     {
         public Vector2 pos = new Vector2(24, 24);
         public float tileSize = 42;
@@ -15,6 +16,8 @@ namespace ChessGame
         ChessPiece[,] board = new ChessPiece[8, 8];
 
         ChessPiece selectedPiece = null;
+        GameManager gm = new GameManager();
+
 
         public ChessBoard()
         {
@@ -80,6 +83,7 @@ namespace ChessGame
         public void SetBoardPiece(int row, int col, ChessPiece piece)
         {
             board[row, col] = piece;
+            gm.SaveGame(board);
         }
     }
 }

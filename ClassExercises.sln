@@ -59,11 +59,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AIE_27_Classes", "AIE_27_Cl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AIE_28_AsteroidsRaylib", "AIE_28_AsteroidsRaylib\AIE_28_AsteroidsRaylib.csproj", "{B5FBEE62-0F19-49C6-98EE-1C0C215CD5D0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIE_29_Breakout", "AIE_29_Breakout\AIE_29_Breakout.csproj", "{94DFEB63-66E0-431B-AD82-E024AEA3EC4F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AIE_29_Breakout", "AIE_29_Breakout\AIE_29_Breakout.csproj", "{94DFEB63-66E0-431B-AD82-E024AEA3EC4F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIE_31_ChessBoard", "AIE_30_ChessBoard\AIE_31_ChessBoard.csproj", "{5F6D9EF0-5F01-4555-885D-23573A7EDB4B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AIE_31_ChessBoard", "AIE_30_ChessBoard\AIE_31_ChessBoard.csproj", "{5F6D9EF0-5F01-4555-885D-23573A7EDB4B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIE_30_AnimalInheritance", "AIE_30_AnimalInheritance\AIE_30_AnimalInheritance.csproj", "{631CE575-E2E0-49BB-8F95-04C148BA7859}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AIE_30_AnimalInheritance", "AIE_30_AnimalInheritance\AIE_30_AnimalInheritance.csproj", "{631CE575-E2E0-49BB-8F95-04C148BA7859}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIE_32_Serialise", "AIE_32_Serialise\AIE_32_Serialise.csproj", "{4C9092AB-2A2F-4A1B-B6F2-C27C5BF6A558}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIE_33_SaveContactV2", "AIE_33_SaveContactV2\AIE_33_SaveContactV2.csproj", "{53D2FE41-8460-4A36-A011-75725A9D2595}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIE_34_SaveContactList", "AIE_34_SaveContactList\AIE_34_SaveContactList.csproj", "{E19209BC-F0A3-44A6-B83B-47575D650E69}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIE_35_HighScores", "AIE_35_HighScores\AIE_35_HighScores.csproj", "{2B5B5F1A-C0E9-4EAE-9B97-1641EF99DD4F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -195,6 +203,22 @@ Global
 		{631CE575-E2E0-49BB-8F95-04C148BA7859}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{631CE575-E2E0-49BB-8F95-04C148BA7859}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{631CE575-E2E0-49BB-8F95-04C148BA7859}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C9092AB-2A2F-4A1B-B6F2-C27C5BF6A558}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C9092AB-2A2F-4A1B-B6F2-C27C5BF6A558}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C9092AB-2A2F-4A1B-B6F2-C27C5BF6A558}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C9092AB-2A2F-4A1B-B6F2-C27C5BF6A558}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53D2FE41-8460-4A36-A011-75725A9D2595}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53D2FE41-8460-4A36-A011-75725A9D2595}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53D2FE41-8460-4A36-A011-75725A9D2595}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53D2FE41-8460-4A36-A011-75725A9D2595}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E19209BC-F0A3-44A6-B83B-47575D650E69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E19209BC-F0A3-44A6-B83B-47575D650E69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E19209BC-F0A3-44A6-B83B-47575D650E69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E19209BC-F0A3-44A6-B83B-47575D650E69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B5B5F1A-C0E9-4EAE-9B97-1641EF99DD4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B5B5F1A-C0E9-4EAE-9B97-1641EF99DD4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B5B5F1A-C0E9-4EAE-9B97-1641EF99DD4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B5B5F1A-C0E9-4EAE-9B97-1641EF99DD4F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

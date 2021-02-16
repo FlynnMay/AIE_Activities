@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ChessGame
 {
-    enum EChessSide
+    public enum EChessSide
     {
         WHITE,
         BLACK
