@@ -65,13 +65,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AIE_31_ChessBoard", "AIE_30
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AIE_30_AnimalInheritance", "AIE_30_AnimalInheritance\AIE_30_AnimalInheritance.csproj", "{631CE575-E2E0-49BB-8F95-04C148BA7859}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIE_32_Serialise", "AIE_32_Serialise\AIE_32_Serialise.csproj", "{4C9092AB-2A2F-4A1B-B6F2-C27C5BF6A558}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AIE_32_Serialise", "AIE_32_Serialise\AIE_32_Serialise.csproj", "{4C9092AB-2A2F-4A1B-B6F2-C27C5BF6A558}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIE_33_SaveContactV2", "AIE_33_SaveContactV2\AIE_33_SaveContactV2.csproj", "{53D2FE41-8460-4A36-A011-75725A9D2595}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AIE_33_SaveContactV2", "AIE_33_SaveContactV2\AIE_33_SaveContactV2.csproj", "{53D2FE41-8460-4A36-A011-75725A9D2595}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIE_34_SaveContactList", "AIE_34_SaveContactList\AIE_34_SaveContactList.csproj", "{E19209BC-F0A3-44A6-B83B-47575D650E69}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AIE_34_SaveContactList", "AIE_34_SaveContactList\AIE_34_SaveContactList.csproj", "{E19209BC-F0A3-44A6-B83B-47575D650E69}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIE_35_HighScores", "AIE_35_HighScores\AIE_35_HighScores.csproj", "{2B5B5F1A-C0E9-4EAE-9B97-1641EF99DD4F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AIE_35_HighScores", "AIE_35_HighScores\AIE_35_HighScores.csproj", "{2B5B5F1A-C0E9-4EAE-9B97-1641EF99DD4F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIE_36_GameStates", "AIE_36_GameStates\AIE_36_GameStates.csproj", "{9C0CE656-CDF6-4B9C-A91D-25ABC328A01D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -219,6 +221,10 @@ Global
 		{2B5B5F1A-C0E9-4EAE-9B97-1641EF99DD4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2B5B5F1A-C0E9-4EAE-9B97-1641EF99DD4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2B5B5F1A-C0E9-4EAE-9B97-1641EF99DD4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C0CE656-CDF6-4B9C-A91D-25ABC328A01D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C0CE656-CDF6-4B9C-A91D-25ABC328A01D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C0CE656-CDF6-4B9C-A91D-25ABC328A01D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C0CE656-CDF6-4B9C-A91D-25ABC328A01D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

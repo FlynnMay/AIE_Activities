@@ -1,6 +1,7 @@
 ﻿using System;
 using Raylib_cs;
 using System.Numerics;
+using AIE_31_ChessBoard;
 
 namespace ChessGame
 {
@@ -11,6 +12,7 @@ namespace ChessGame
         string windowTitle = "Chess Game";
 
         ChessBoard board;
+        public ChessPiece selected;
 
         static void Main(string[] args)
         {
@@ -42,13 +44,15 @@ namespace ChessGame
 
         void Update()
         {
-            if(Raylib.IsMouseButtonPressed(MouseButton.MOUSE_LEFT_BUTTON))
+            GameManager gm = new GameManager();
+
+            if (Raylib.IsMouseButtonPressed(MouseButton.MOUSE_LEFT_BUTTON))
             {
                 var mousePos = Raylib.GetMousePosition();
                 int mouseXIndex = (int)((mousePos.X - board.pos.X) / board.tileSize);
                 int mouseYIndex = (int)((mousePos.Y - board.pos.Y) / board.tileSize);
 
-                var selected = board.GetSelected();
+                selected = board.GetSelected();
                 if (selected != null && selected.IsValidMove(mouseYIndex, mouseXIndex))
                 {
                     selected.MoveTo(mouseYIndex, mouseXIndex);
@@ -57,6 +61,14 @@ namespace ChessGame
                 {
                     board.SelectTile(mouseYIndex, mouseXIndex);
                 }
+            }
+            if (Raylib.IsKeyPressed(KeyboardKey.KEY_S))
+            {
+                gm.SaveGame(board.GetPieces());
+            }
+            if (Raylib.IsKeyPressed(KeyboardKey.KEY_L))
+            {
+                gm.LoadGame(board);
             }
         }
 
@@ -153,5 +165,6 @@ namespace ChessGame
                 }
             }
         }
+
     }
 }

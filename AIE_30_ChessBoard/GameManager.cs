@@ -31,8 +31,12 @@ namespace AIE_31_ChessBoard
                     {
                         Console.WriteLine($"{piece.GetPieceType()} {piece.GetRow()}");
 
-                            string p = piece.GetId() + " ";
-                            sw.Write(piece.GetSide() == EChessSide.BLACK ? p.ToLower() : p);                        
+                        string p = piece.GetPieceType().ToString().First() + " ";
+                        if (piece.GetPieceType() == ChessPiece.Type.KNIGHT)
+                        {
+                            p = piece.GetSide() == EChessSide.BLACK ? "h" + " " : "H" + " ";
+                        }
+                        sw.Write(piece.GetSide() == EChessSide.BLACK ? p.ToLower() : p);
                     }
                     else
                     {
@@ -42,41 +46,42 @@ namespace AIE_31_ChessBoard
                 }
             }
         }
-        public void LoadGame(ChessPiece[,] pieces, ChessBoard board)
+
+        public void LoadGame(ChessBoard board)
         {
+
+            List<string> lines = new List<string>();
+            board.ClearBoard();
+            var pieces = board.GetPieces();
+
+            for (int y = 0; y < 8; y++)
+                for (int x = 0; x < 8; x++)
+                    pieces[y, x] = null;
+
             using (StreamReader sr = File.OpenText(filename))
             {
-                char s = '0';
-                int x = 0;
-                int y = 0;
-                ChessPiece cp;
-                while (sr.Peek() >= 0)
-                {
-                    if (counter % 8 == 0 && counter != 0)
-                    {
-                        sw.WriteLine("");
-                    }
+                string s;
+                while ((s = sr.ReadLine()) != null)
+                    lines.Add(s.Replace(" ",""));
+            }
 
-                    s = (char)sr.Read();
-                    if (s.ToString().ToUpper() == ChessPiece.Id.B.ToString()) 
-                        pieces[x, y] = new ChessPieceBishop(board, 
-                            Char.IsUpper(s) ? EChessSide.WHITE : EChessSide.BLACK, y,x);
-                    if (s.ToString().ToUpper() == ChessPiece.Id.H.ToString()) 
-                        pieces[x, y] = new ChessPieceKnight(board, 
-                            Char.IsUpper(s) ? EChessSide.WHITE : EChessSide.BLACK, y,x);
-                    if (s.ToString().ToUpper() == ChessPiece.Id.K.ToString()) 
-                        pieces[x, y] = new ChessPieceKnight(board, 
-                            Char.IsUpper(s) ? EChessSide.WHITE : EChessSide.BLACK, y,x);
-                    s = (char)sr.Read();
-                    if (s.ToString().ToUpper() == ChessPiece.Id.P.ToString()) 
-                        pieces[x, y] = new ChessPiecePawn(board, 
-                            Char.IsUpper(s) ? EChessSide.WHITE : EChessSide.BLACK, y,x);
-                    if (s.ToString().ToUpper() == ChessPiece.Id.Q.ToString()) 
-                        pieces[x, y] = new ChessPieceQueen(board, 
-                            Char.IsUpper(s) ? EChessSide.WHITE : EChessSide.BLACK, y,x);
-                    if (s.ToString().ToUpper() == ChessPiece.Id.R.ToString()) 
-                        pieces[x, y] = new ChessPieceRook(board, 
-                            Char.IsUpper(s) ? EChessSide.WHITE : EChessSide.BLACK, y,x);
+            for (int y = 0; y < 8; y++)
+            {
+                for (int x = 0; x < 8; x++)
+                {
+                    char c = lines[y][x];
+                    if (c == '*')
+                        continue;
+
+                    EChessSide side = char.IsLower(c) ? EChessSide.BLACK : EChessSide.WHITE;
+                    c = char.ToLower(c);
+
+                    if (c == 'p') pieces[y, x] = new ChessPiecePawn(board, side, y, x);
+                    if (c == 'k') pieces[y, x] = new ChessPieceKing(board, side, y, x);
+                    if (c == 'h') pieces[y, x] = new ChessPieceKnight(board, side, y, x);
+                    if (c == 'b') pieces[y, x] = new ChessPieceBishop(board, side, y, x);
+                    if (c == 'r') pieces[y, x] = new ChessPieceRook(board, side, y, x);
+                    if (c == 'q') pieces[y, x] = new ChessPieceQueen(board, side, y, x);
                 }
             }
         }

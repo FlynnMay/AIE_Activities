@@ -16,32 +16,21 @@ namespace ChessGame
             QUEEN,
             KING
         }
-        public enum Id
-        {
-            P,
-            H,
-            B,
-            R,
-            Q,
-            K
-        }
 
         protected ChessBoard board;
 
         EChessSide side;
         int row;
         int col;
-        Id id;
         Type type;
 
-        public ChessPiece(ChessBoard board, EChessSide side, Type type, int row, int col, Id id)
+        public ChessPiece(ChessBoard board, EChessSide side, Type type, int row, int col)
         {
             this.board = board;
             this.side = side;
             this.type = type;
             this.row = row;
             this.col = col;
-            this.id = id;
         }
 
         public virtual bool IsValidMove(int targetRow, int targetCol)
@@ -57,10 +46,6 @@ namespace ChessGame
         public int GetCol()
         {
             return col;
-        }
-        public Id GetId()
-        {
-            return id;
         }
 
         public Type GetPieceType()
@@ -86,14 +71,13 @@ namespace ChessGame
     class ChessPiecePawn : ChessPiece
     {
         public ChessPiecePawn(ChessBoard board, EChessSide side, int row, int col) :
-            base(board, side, Type.PAWN, row, col, Id.P)
+            base(board, side, Type.PAWN, row, col)
         {
 
         }
 
         public override bool IsValidMove(int targetRow, int targetCol)
         {
-
             var targetPiece = board.GetPiece(targetRow, targetCol);
             if (targetPiece != null && targetPiece.GetSide() == GetSide())
                 return false;
@@ -122,7 +106,7 @@ namespace ChessGame
     class ChessPieceRook : ChessPiece
     {
         public ChessPieceRook(ChessBoard board, EChessSide side, int row, int col) :
-            base(board, side, Type.ROOK, row, col, Id.R)
+            base(board, side, Type.ROOK, row, col)
         {
 
         }
@@ -159,7 +143,7 @@ namespace ChessGame
     class ChessPieceKnight : ChessPiece
     {
         public ChessPieceKnight(ChessBoard board, EChessSide side, int row, int col) :
-            base(board, side, Type.KNIGHT, row, col, Id.H)
+            base(board, side, Type.KNIGHT, row, col)
         {
 
         }
@@ -172,7 +156,7 @@ namespace ChessGame
     class ChessPieceBishop : ChessPiece
     {
         public ChessPieceBishop(ChessBoard board, EChessSide side, int row, int col) :
-            base(board, side, Type.BISHOP, row, col, Id.B)
+            base(board, side, Type.BISHOP, row, col)
         {
 
         }
@@ -185,7 +169,7 @@ namespace ChessGame
     class ChessPieceQueen : ChessPiece
     {
         public ChessPieceQueen(ChessBoard board, EChessSide side, int row, int col) :
-            base(board, side, Type.QUEEN, row, col, Id.Q)
+            base(board, side, Type.QUEEN, row, col)
         {
 
         }
@@ -198,7 +182,7 @@ namespace ChessGame
     class ChessPieceKing : ChessPiece
     {
         public ChessPieceKing(ChessBoard board, EChessSide side, int row, int col) :
-            base(board, side, Type.KING, row, col, Id.K)
+            base(board, side, Type.KING, row, col)
         {
 
         }
