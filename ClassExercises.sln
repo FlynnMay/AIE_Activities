@@ -73,7 +73,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AIE_34_SaveContactList", "A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AIE_35_HighScores", "AIE_35_HighScores\AIE_35_HighScores.csproj", "{2B5B5F1A-C0E9-4EAE-9B97-1641EF99DD4F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIE_36_GameStates", "AIE_36_GameStates\AIE_36_GameStates.csproj", "{9C0CE656-CDF6-4B9C-A91D-25ABC328A01D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AIE_36_GameStates", "AIE_36_GameStates\AIE_36_GameStates.csproj", "{9C0CE656-CDF6-4B9C-A91D-25ABC328A01D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIE_37_BrainFInterpreter", "AIE_37_BrainFInterpreter\AIE_37_BrainFInterpreter.csproj", "{3E355DD3-215C-428C-9279-E1F95B61DDDA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -225,6 +227,10 @@ Global
 		{9C0CE656-CDF6-4B9C-A91D-25ABC328A01D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9C0CE656-CDF6-4B9C-A91D-25ABC328A01D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9C0CE656-CDF6-4B9C-A91D-25ABC328A01D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E355DD3-215C-428C-9279-E1F95B61DDDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E355DD3-215C-428C-9279-E1F95B61DDDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E355DD3-215C-428C-9279-E1F95B61DDDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E355DD3-215C-428C-9279-E1F95B61DDDA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
