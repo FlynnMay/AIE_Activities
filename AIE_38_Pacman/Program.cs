@@ -32,6 +32,7 @@ namespace AIE_38_Pacman
 
         void LoadGame()
         {
+            Assets.LoadAssets();
             gameState = new GameLevelScreen(this);
         }
 

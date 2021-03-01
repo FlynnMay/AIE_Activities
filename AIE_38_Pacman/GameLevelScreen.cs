@@ -67,6 +67,15 @@ namespace AIE_38_Pacman
             }
         }
 
+        Texture2D DecideWallShape(int row, int col)
+        {
+            int wallId = 0;
+            if (GetTileValue(row - 1, col) == TileType.Wall) wallId += 1;
+            if (GetTileValue(row, col + 1) == TileType.Wall) wallId += 2;
+            if (GetTileValue(row + 1, col) == TileType.Wall) wallId += 4;
+            if (GetTileValue(row, col - 1) == TileType.Wall) wallId += 8;
+            return Assets.walls[wallId];
+        }
         public void CreateGhost(int row, int col)
         {
             var rect = GetTileRect(row, col);
@@ -189,8 +198,15 @@ namespace AIE_38_Pacman
                     var tileVal = GetTileValue(row, col);
                     Rectangle rect = GetTileRect(row, col);
                     Color color = GetTileColor(row, col);
-                    Raylib.DrawRectangleRec(rect, color);
-
+                    if (tileVal == TileType.Wall)
+                    {
+                        Texture2D wallShape = DecideWallShape(row, col);
+                        Raylib.DrawTextureEx(wallShape, new Vector2(rect.x , rect.y), 0.0f, 0.3f, Color.BLUE); ;
+                    }
+                    else
+                    {
+                        Raylib.DrawRectangleRec(rect, color);
+                    }
                     if (tileVal == TileType.Dot)
                     {
                         int pacDotSize = 4;
@@ -254,5 +270,6 @@ namespace AIE_38_Pacman
                 }
             }
         }
+
     }
 }
