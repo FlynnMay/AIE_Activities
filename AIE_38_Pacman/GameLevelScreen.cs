@@ -39,16 +39,18 @@ namespace AIE_38_Pacman
         {
             int[,] tilemap = new int[,]
             {
-                {1,1,1,1,1,1,1,1,1,1},
-                {1,0,0,0,4,0,0,0,0,1},
-                {1,0,1,1,1,0,1,1,0,1},
-                {1,0,1,0,0,0,0,1,0,1},
-                {1,0,1,0,1,1,0,1,0,1},
-                {1,0,1,0,1,1,0,1,0,1},
-                {1,0,1,0,0,0,0,1,0,1},
-                {1,0,1,1,0,1,1,1,0,1},
-                {1,0,0,0,3,0,0,0,0,1},
-                {1,1,1,1,1,1,1,1,1,1},
+                {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+                {1,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+                {1,0,1,1,1,0,1,1,0,0,0,0,0,0,0,0,1,1,0,1,1,1,0,1},
+                {1,0,1,0,0,0,0,1,1,1,1,0,0,1,1,1,1,0,0,0,0,1,0,1},
+                {1,0,1,0,1,1,0,1,0,0,0,0,0,0,0,0,1,0,1,1,0,1,0,1},
+                {1,0,1,0,1,1,0,1,0,1,1,0,0,1,1,0,1,0,1,1,0,1,0,1},
+                {1,0,1,0,1,1,0,1,0,1,1,0,0,1,1,0,1,0,1,1,0,1,0,1},
+                {1,0,1,0,1,1,0,1,0,0,0,0,0,0,0,0,1,0,1,1,0,1,0,1},
+                {1,0,1,0,0,0,0,1,1,1,1,0,0,1,1,1,1,0,0,0,0,1,0,1},
+                {1,0,1,1,0,1,1,1,0,0,0,0,0,0,0,0,1,1,1,0,1,1,0,1},
+                {1,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,1},
+                {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
             };
             map = new TileType[tilemap.GetLength(0), tilemap.GetLength(1)];
             for (int row = 0; row < tilemap.GetLength(0); row++)
@@ -88,7 +90,7 @@ namespace AIE_38_Pacman
         {
             var rect = GetTileRect(row, col);
             var pos = new Vector2(rect.x + rect.width / 2, rect.y + rect.height / 2);
-            player = new Player(pos, this);
+            player = new Player(pos, this, program);
             SetTileValue(row, col, TileType.Empty);
         }
 
@@ -200,8 +202,9 @@ namespace AIE_38_Pacman
                     Color color = GetTileColor(row, col);
                     if (tileVal == TileType.Wall)
                     {
+                        Vector2 pos = new Vector2(rect.x, rect.y);
                         Texture2D wallShape = DecideWallShape(row, col);
-                        Raylib.DrawTextureEx(wallShape, new Vector2(rect.x , rect.y), 0.0f, 0.3f, Color.BLUE); ;
+                        Raylib.DrawTextureEx(wallShape, pos, 0.0f, 0.3f, Color.BLUE); ;
                     }
                     else
                     {
@@ -209,8 +212,9 @@ namespace AIE_38_Pacman
                     }
                     if (tileVal == TileType.Dot)
                     {
-                        int pacDotSize = 4;
-                        Raylib.DrawCircle((int)(rect.x + rect.width / 2), (int)(rect.y + rect.height / 2), pacDotSize, Color.WHITE);
+                        Vector2 pos = new Vector2(rect.x, rect.y);
+                        float pacDotSize = 0.3f;
+                        Raylib.DrawTextureEx(Assets.pacDot, pos, 0, pacDotSize, Color.WHITE);
                     }
                 }
             }

@@ -5,9 +5,9 @@ namespace AIE_38_Pacman
 {
     class Program
     {
-        int windowWidth = 800;
-        int windowHeight = 450;
-        string windowTitle = "PacMan";
+        public int windowWidth = 800;
+        public int windowHeight = 450;
+        public string windowTitle = "PacMan";
 
         IGameState gameState;
         static void Main(string[] args)

@@ -14,7 +14,7 @@ namespace AIE_38_Pacman
         Vector2 dir = new Vector2(1, 0);
 
         float maxSpeed = 1;
-        float speed = 1;
+        float speed = 10;
         float lerpTime = 0;
         Vector2 starTilePos;
         Vector2 endTilePos;
@@ -50,6 +50,7 @@ namespace AIE_38_Pacman
         }
         public void Update()
         {
+            //speed = Raylib.GetFPS();
             int currentTile = level.GetTileId(pos);
 
             lerpTime += Raylib.GetFrameTime() * speed;

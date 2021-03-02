@@ -8,10 +8,16 @@ namespace AIE_38_Pacman
     class Assets
     {
         public static Dictionary<int, Texture2D> walls = new Dictionary<int, Texture2D>();
+        public static Texture2D pacDot;
+        public static Texture2D pacOpen;
+        public static Texture2D pacClosed;
         public static void LoadAssets()
         {
-            string dirFile = "./assets/";
-            foreach (var wall in Directory.GetFiles(dirFile))
+            pacDot = Raylib.LoadTexture("./assets/pellet.png");
+            pacOpen = Raylib.LoadTexture("./assets/PacOpen.png");
+            pacClosed = Raylib.LoadTexture("./assets/PacClosed.png");
+            string wallsDir = "./assets/wall pieces";
+            foreach (var wall in Directory.GetFiles(wallsDir))
             {
                 string tmp = wall;
                 Regex rgx = new Regex("[^0-9]");

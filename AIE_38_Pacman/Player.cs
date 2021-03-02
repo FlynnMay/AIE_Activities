@@ -8,21 +8,26 @@ namespace AIE_38_Pacman
 {
     class Player
     {
+        Program p;
         GameLevelScreen level;
         Vector2 spawnPos = new Vector2();
         Vector2 pos = new Vector2();
         Vector2 dir = new Vector2(1, 0);
 
+        float rotation = 0.0f;
+
         float maxSpeed = 4;
         float speed = 4;
         float lerpTime = 0;
+        float mouthTimer = 0;
         Vector2 starTilePos;
         Vector2 endTilePos;
-        public Player(Vector2 pos, GameLevelScreen level)
+        public Player(Vector2 pos, GameLevelScreen level, Program p)
         {
             this.level = level;
             this.pos = pos;
             this.spawnPos = pos;
+            this.p = p;
 
             starTilePos = GetCurrentTilePos();
             endTilePos = GetNextTilePos();
@@ -49,10 +54,26 @@ namespace AIE_38_Pacman
         {
             int currentTile = level.GetTileId(pos);
 
-            if (Raylib.IsKeyPressed(KeyboardKey.KEY_LEFT)) dir = new Vector2(-1, 0);
-            if (Raylib.IsKeyPressed(KeyboardKey.KEY_RIGHT)) dir = new Vector2(1, 0);
-            if (Raylib.IsKeyPressed(KeyboardKey.KEY_UP)) dir = new Vector2(0, -1);
-            if (Raylib.IsKeyPressed(KeyboardKey.KEY_DOWN)) dir = new Vector2(0, 1);
+            if (Raylib.IsKeyPressed(KeyboardKey.KEY_LEFT))
+            {
+                dir = new Vector2(-1, 0);
+                rotation = 180;
+            }
+            if (Raylib.IsKeyPressed(KeyboardKey.KEY_RIGHT))
+            {
+                dir = new Vector2(1, 0);
+                rotation = 0;
+            };
+            if (Raylib.IsKeyPressed(KeyboardKey.KEY_UP))
+            {
+                dir = new Vector2(0, -1);
+                rotation = -90;
+            };
+            if (Raylib.IsKeyPressed(KeyboardKey.KEY_DOWN))
+            {
+                dir = new Vector2(0, 1);
+                rotation = 90;
+            };
 
             lerpTime += Raylib.GetFrameTime() * speed;
             if (lerpTime > 1 || speed <= 0.0f)
@@ -80,7 +101,23 @@ namespace AIE_38_Pacman
 
         public void Draw()
         {
-            Raylib.DrawCircle((int)pos.X, (int)pos.Y, 12, Color.YELLOW);
+            Texture2D pacman;
+            if (level.GetTileValue(pos) != TileType.Wall) mouthTimer += Raylib.GetFrameTime();
+
+            if (mouthTimer > 0.4f) pacman = Assets.pacClosed;
+            else pacman = Assets.pacOpen;
+
+            if (mouthTimer > 0.8f) mouthTimer = 0;
+
+            //Vector2 newPos = new Vector2(pos.X - pacman.width / 2.5f, pos.Y - pacman.height / 2.5f);
+            //Raylib.DrawTextureEx(pacman, newPos, rotation, .8f, Color.YELLOW);
+            int frameWidth = pacman.width;
+            int frameHeight = pacman.height;
+            Rectangle source = new Rectangle(0, 0, frameWidth, frameHeight);
+            Rectangle destination = new Rectangle(pos.X, pos.Y, frameWidth, frameHeight);
+            Vector2 origin = new Vector2(frameWidth / 2, frameHeight / 2);
+            Raylib.DrawTexturePro(pacman, source, destination, origin, rotation, Color.YELLOW);
+            //Raylib.DrawCircle((int)pos.X, (int)pos.Y, 12, Color.YELLOW);
             DebugDraw();
         }
         public void DebugDraw()
