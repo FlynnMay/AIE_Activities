@@ -90,8 +90,10 @@ namespace AIE_38_Pacman
 
         public void Draw()
         {
-            Raylib.DrawRectangleRec(new Rectangle(pos.X - 8, pos.Y - 8, 16, 16), Color.ORANGE);
-            DebugDraw();
+            var newPos = new Vector2(pos.X - 25, pos.Y - 25);
+            Raylib.DrawTextureEx(Assets.ghost, newPos, 0.0f, 0.5f, Color.RED);
+            //Raylib.DrawRectangleRec(new Rectangle(pos.X - 8, pos.Y - 8, 16, 16), Color.ORANGE);
+            if (Raylib.IsKeyDown(KeyboardKey.KEY_LEFT_ALT)) DebugDraw();
         }
         public void DebugDraw()
         {
@@ -99,6 +101,8 @@ namespace AIE_38_Pacman
             int col = level.GetXPosToCol(pos.X);
             var rect = level.GetTileRect(row, col);
             Raylib.DrawRectangleLinesEx(rect, 1, Color.YELLOW);
+
+            if (level.GetPlayer() != null) Raylib.DrawLineEx(pos, level.GetPlayer().GetPosition(), 1, Color.BLUE);
 
             Raylib.DrawCircle((int)starTilePos.X, (int)starTilePos.Y, 3, Color.RED);
             Raylib.DrawCircle((int)endTilePos.X, (int)endTilePos.Y, 3, Color.RED);

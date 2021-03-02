@@ -102,7 +102,8 @@ namespace AIE_38_Pacman
         public void Draw()
         {
             Texture2D pacman;
-            if (level.GetTileValue(pos) != TileType.Wall) mouthTimer += Raylib.GetFrameTime();
+            
+            if (level.GetTileValue(GetNextTilePos()) != TileType.Wall) mouthTimer += Raylib.GetFrameTime();
 
             if (mouthTimer > 0.4f) pacman = Assets.pacClosed;
             else pacman = Assets.pacOpen;
@@ -114,11 +115,12 @@ namespace AIE_38_Pacman
             int frameWidth = pacman.width;
             int frameHeight = pacman.height;
             Rectangle source = new Rectangle(0, 0, frameWidth, frameHeight);
-            Rectangle destination = new Rectangle(pos.X, pos.Y, frameWidth, frameHeight);
-            Vector2 origin = new Vector2(frameWidth / 2, frameHeight / 2);
+            Rectangle destination = new Rectangle(pos.X, pos.Y, frameWidth / 4, frameHeight / 4);
+            Vector2 origin = new Vector2(frameWidth / 8, frameHeight / 8);
             Raylib.DrawTexturePro(pacman, source, destination, origin, rotation, Color.YELLOW);
             //Raylib.DrawCircle((int)pos.X, (int)pos.Y, 12, Color.YELLOW);
-            DebugDraw();
+            
+            if(Raylib.IsKeyDown(KeyboardKey.KEY_LEFT_ALT)) DebugDraw();
         }
         public void DebugDraw()
         {
@@ -126,6 +128,7 @@ namespace AIE_38_Pacman
             int col = level.GetXPosToCol(pos.X);
             var rect = level.GetTileRect(row, col);
             Raylib.DrawRectangleLinesEx(rect, 1, Color.YELLOW);
+            Raylib.DrawRectangleLinesEx(level.GetTileRect(GetNextTilePos()), 5, Color.GREEN);
 
             Raylib.DrawCircle((int)starTilePos.X, (int)starTilePos.Y, 3, Color.RED);
             Raylib.DrawCircle((int)endTilePos.X, (int)endTilePos.Y, 3, Color.RED);

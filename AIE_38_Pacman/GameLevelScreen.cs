@@ -49,7 +49,7 @@ namespace AIE_38_Pacman
                 {1,0,1,0,1,1,0,1,0,0,0,0,0,0,0,0,1,0,1,1,0,1,0,1},
                 {1,0,1,0,0,0,0,1,1,1,1,0,0,1,1,1,1,0,0,0,0,1,0,1},
                 {1,0,1,1,0,1,1,1,0,0,0,0,0,0,0,0,1,1,1,0,1,1,0,1},
-                {1,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,1},
+                {1,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,1},
                 {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
             };
             map = new TileType[tilemap.GetLength(0), tilemap.GetLength(1)];
@@ -94,6 +94,10 @@ namespace AIE_38_Pacman
             SetTileValue(row, col, TileType.Empty);
         }
 
+        public Player GetPlayer()
+        {
+            return player;
+        }
         public int GetTileId(int row, int col)
         {
             return row * map.GetLength(1) + col;

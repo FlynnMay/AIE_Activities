@@ -11,11 +11,13 @@ namespace AIE_38_Pacman
         public static Texture2D pacDot;
         public static Texture2D pacOpen;
         public static Texture2D pacClosed;
+        public static Texture2D ghost;
         public static void LoadAssets()
         {
             pacDot = Raylib.LoadTexture("./assets/pellet.png");
             pacOpen = Raylib.LoadTexture("./assets/PacOpen.png");
             pacClosed = Raylib.LoadTexture("./assets/PacClosed.png");
+            ghost = Raylib.LoadTexture("./assets/Ghost.png");
             string wallsDir = "./assets/wall pieces";
             foreach (var wall in Directory.GetFiles(wallsDir))
             {
