@@ -13,13 +13,12 @@ namespace AIE_38_Pacman
         Vector2 pos = new Vector2();
         Vector2 dir = new Vector2(1, 0);
 
-        float maxSpeed = 1;
-        float speed = 10;
+        float speed = 2;
         float lerpTime = 0;
         Vector2 starTilePos;
         Vector2 endTilePos;
         Random random = new Random();
-
+        public bool isAlive = true;
         public Ghost(Vector2 pos, GameLevelScreen level)
         {
             this.level = level;
@@ -64,9 +63,13 @@ namespace AIE_38_Pacman
                 if (level.GetTileValue(row - 1, col) != TileType.Wall) availableDirections.Add(new Vector2(0, -1));
                 if (level.GetTileValue(row + 1, col) != TileType.Wall) availableDirections.Add(new Vector2(0, 1));
 
+
                 int index = random.Next(0, availableDirections.Count);
 
                 dir = availableDirections[index];
+                
+                
+
                 lerpTime = 0;
                 starTilePos = GetCurrentTilePos();
                 endTilePos = GetNextTilePos();

@@ -8,11 +8,11 @@ namespace AIE_38_Pacman
 {
     class Player
     {
-        Program p;
         GameLevelScreen level;
         Vector2 spawnPos = new Vector2();
         Vector2 pos = new Vector2();
         Vector2 dir = new Vector2(1, 0);
+        Texture2D pacman;
 
         float rotation = 0.0f;
 
@@ -20,15 +20,14 @@ namespace AIE_38_Pacman
         float speed = 4;
         float lerpTime = 0;
         float mouthTimer = 0;
+        int ammo = 0;
         Vector2 starTilePos;
         Vector2 endTilePos;
-        public Player(Vector2 pos, GameLevelScreen level, Program p)
+        public Player(Vector2 pos, GameLevelScreen level)
         {
             this.level = level;
             this.pos = pos;
             this.spawnPos = pos;
-            this.p = p;
-
             starTilePos = GetCurrentTilePos();
             endTilePos = GetNextTilePos();
         }
@@ -97,12 +96,22 @@ namespace AIE_38_Pacman
             {
                 OnTileEnter(newCurrentTile);
             }
+
+            if (Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE) && ammo >= 1)
+            {
+                level.CreateBullet(dir, pos);
+                ammo -= 1;
+            }
         }
 
         public void Draw()
         {
-            Texture2D pacman;
-            
+
+            int row = level.GetYPosToRow(pos.Y);
+            int col = level.GetXPosToCol(pos.X);
+
+            Raylib.DrawText($"Ammo: {ammo}", 390, 10, 20, Color.WHITE);
+
             if (level.GetTileValue(GetNextTilePos()) != TileType.Wall) mouthTimer += Raylib.GetFrameTime();
 
             if (mouthTimer > 0.4f) pacman = Assets.pacClosed;
@@ -141,12 +150,14 @@ namespace AIE_38_Pacman
             if (tileVal == TileType.Dot)
             {
                 level.EatPacDot(pos);
+                ammo += 1;
             }
         }
         public void OnCollision(Ghost ghost)
         {
             pos = spawnPos;
             dir = new Vector2(1, 0);
+            rotation = 0;
             starTilePos = GetCurrentTilePos();
             endTilePos = GetNextTilePos();
             lerpTime = 0;

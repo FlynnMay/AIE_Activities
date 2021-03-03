@@ -26,32 +26,33 @@ namespace AIE_38_Pacman
         float mapXPos = 10;
         float mapYPos = 40;
 
-        int score = 1000;
+        int score = 0;
         int lives = 3;
 
         Player player;
         List<Ghost> ghosts = new List<Ghost>();
+        List<Bullet> bullets = new List<Bullet>();
         public GameLevelScreen(Program program) : base(program)
         {
             LoadLevel();
         }
+        int[,] tilemap = new int[,]
+        {
+            {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+            {1,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,1},
+            {1,0,1,1,1,0,1,1,0,0,0,0,0,0,0,0,1,1,0,1,1,1,0,1},
+            {1,0,1,0,0,0,0,1,1,1,1,0,0,1,1,1,1,0,0,0,0,1,0,1},
+            {1,0,1,0,1,1,0,1,0,0,0,0,0,0,0,0,1,0,1,1,0,1,0,1},
+            {1,0,1,0,1,1,0,1,0,1,1,0,0,1,1,0,1,0,1,1,0,1,0,1},
+            {1,0,1,0,1,1,0,1,0,1,1,0,0,1,1,0,1,0,1,1,0,1,0,1},
+            {1,0,1,0,1,1,0,1,0,0,0,0,0,0,0,0,1,0,1,1,0,1,0,1},
+            {1,0,1,0,0,0,0,1,1,1,1,0,0,1,1,1,1,0,0,0,0,1,0,1},
+            {1,0,1,1,0,1,1,1,0,0,0,0,0,0,0,0,1,1,1,0,1,1,0,1},
+            {1,0,4,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,4,0,1},
+            {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+        };
         void LoadLevel()
         {
-            int[,] tilemap = new int[,]
-            {
-                {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-                {1,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-                {1,0,1,1,1,0,1,1,0,0,0,0,0,0,0,0,1,1,0,1,1,1,0,1},
-                {1,0,1,0,0,0,0,1,1,1,1,0,0,1,1,1,1,0,0,0,0,1,0,1},
-                {1,0,1,0,1,1,0,1,0,0,0,0,0,0,0,0,1,0,1,1,0,1,0,1},
-                {1,0,1,0,1,1,0,1,0,1,1,0,0,1,1,0,1,0,1,1,0,1,0,1},
-                {1,0,1,0,1,1,0,1,0,1,1,0,0,1,1,0,1,0,1,1,0,1,0,1},
-                {1,0,1,0,1,1,0,1,0,0,0,0,0,0,0,0,1,0,1,1,0,1,0,1},
-                {1,0,1,0,0,0,0,1,1,1,1,0,0,1,1,1,1,0,0,0,0,1,0,1},
-                {1,0,1,1,0,1,1,1,0,0,0,0,0,0,0,0,1,1,1,0,1,1,0,1},
-                {1,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,1},
-                {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-            };
             map = new TileType[tilemap.GetLength(0), tilemap.GetLength(1)];
             for (int row = 0; row < tilemap.GetLength(0); row++)
                 for (int col = 0; col < tilemap.GetLength(1); col++)
@@ -68,7 +69,6 @@ namespace AIE_38_Pacman
                 }
             }
         }
-
         Texture2D DecideWallShape(int row, int col)
         {
             int wallId = 0;
@@ -90,8 +90,15 @@ namespace AIE_38_Pacman
         {
             var rect = GetTileRect(row, col);
             var pos = new Vector2(rect.x + rect.width / 2, rect.y + rect.height / 2);
-            player = new Player(pos, this, program);
+            player = new Player(pos, this);
             SetTileValue(row, col, TileType.Empty);
+        }
+
+        public void CreateBullet(Vector2 dir, Vector2 pos)
+        {
+            Vector2 bulletPos = new Vector2(pos.X - tileWidth / 2, pos.Y - tileHeight / 2);
+            Bullet bullet = new Bullet(bulletPos, dir, this);
+            bullets.Add(bullet);
         }
 
         public Player GetPlayer()
@@ -122,7 +129,7 @@ namespace AIE_38_Pacman
         }
         public void SetTileValue(int row, int col, TileType value)
         {
-            if(value == TileType.Dot && map[row,col] != TileType.Dot)
+            if (value == TileType.Dot && map[row, col] != TileType.Dot)
             {
                 numPacDots += 1;
             }
@@ -170,12 +177,60 @@ namespace AIE_38_Pacman
 
         public override void Update()
         {
-            player.Update();
+            if (player != null)
+                player.Update();
             foreach (var ghost in ghosts)
             {
                 ghost.Update();
             }
+            foreach (var bullet in bullets)
+            {
+                bullet.Update();
+            }
             HandlePlayerGhostCollisions();
+            HandleBulletGhostCollisions();
+
+            List<Bullet> bulletsToRemove = new List<Bullet>();
+            List<Ghost> ghostsToRemove = new List<Ghost>();
+
+            // update all bullets
+            foreach (var bullet in bullets)
+            {
+                if (bullet.isAlive)
+                {
+                    bullet.Update();
+                }
+                else
+                {
+                    bulletsToRemove.Add(bullet);
+                }
+            }
+
+            // remove all dead bullets
+            foreach (var b in bulletsToRemove)
+                bullets.Remove(b);
+            
+            // update all bullets
+            foreach (var ghost in ghosts)
+            {
+                if (ghost.isAlive)
+                {
+                    ghost.Update();
+                }
+                else
+                {
+                    ghostsToRemove.Add(ghost);
+                }
+            }
+
+            // remove all dead bullets
+            foreach (var g in ghostsToRemove)
+            {
+                ghosts.Remove(g);
+                score += 100;
+            }
+
+            if (ghosts.Count <= 0) LoadLevel();
         }
         public override void Draw()
         {
@@ -187,6 +242,11 @@ namespace AIE_38_Pacman
             foreach (var ghost in ghosts)
             {
                 ghost.Draw();
+            }
+
+            foreach (var bullet in bullets)
+            {
+                bullet.Draw();
             }
 
             if (Raylib.IsKeyDown(KeyboardKey.KEY_LEFT_CONTROL))
@@ -253,7 +313,7 @@ namespace AIE_38_Pacman
         public void EatPacDot(int row, int col)
         {
             SetTileValue(row, col, TileType.Empty);
-            score += 10;
+            //score += 10;
             if (numPacDots <= 0) LoadLevel();
         }
         public void EatPacDot(Vector2 pos)
@@ -279,5 +339,33 @@ namespace AIE_38_Pacman
             }
         }
 
+        void HandleBulletGhostCollisions()
+        {
+            foreach (var ghost in ghosts)
+            {
+                foreach (var bullet in bullets)
+                {
+                    int bulletCol = GetXPosToCol(bullet.pos.X);
+                    int bulletRow = GetYPosToRow(bullet.pos.Y);
+                    int ghostCol = GetXPosToCol(ghost.GetPosition().X);
+                    int ghostRow = GetYPosToRow(ghost.GetPosition().Y);
+
+                    if (bulletCol == ghostCol && bulletRow == ghostRow )
+                    {
+                        bullet.isAlive = false;
+                        ghost.isAlive = false;
+                    }
+                }
+                var ghostTileId = GetTileId(ghost.GetPosition());
+                var playerTileId = GetTileId(player.GetPosition());
+
+                if (ghostTileId == playerTileId)
+                {
+                    player.OnCollision(ghost);
+                    ghost.OnCollision(player);
+                    lives -= 1;
+                }
+            }
+        }
     }
 }
